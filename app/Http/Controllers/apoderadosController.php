@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class apoderadosController extends Controller
@@ -11,7 +12,11 @@ class apoderadosController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $apoderados = DB::table('apoderados')
+        ->paginate(10);
+        //->get();
+
+        return view('clientes.index',compact('apoderados'));
     }
 
     /**

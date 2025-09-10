@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Colegios;
-use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Monolog\Formatter\JsonFormatter;
 
 class colegiosController extends Controller
 {

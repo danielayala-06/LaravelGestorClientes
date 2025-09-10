@@ -12,4 +12,4 @@ Route::get('/', function () {
 Route::get('/colegios', [colegiosController::class, 'index']);
 
 //Ruta para mostrar la vista del proyecto
-Route::get('/apoderados',[apoderadosController::class, 'index']);
+Route::get('/clientes',[apoderadosController::class, 'index']);
