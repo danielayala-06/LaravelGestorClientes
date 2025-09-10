@@ -8,5 +8,5 @@ class Colegios extends Model
 {
     protected $table = 'colegios';
     protected $fillable = ['nombre', 'nivel', 'ubicacion'];
-    protected $time_stamp = false;
+    protected $timestamps = false;
 }

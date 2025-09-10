@@ -8,6 +8,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/dashboard', 
+    function() { return view('dashboard');
+});
+
 //Ruta para obtener todos los colegios:
 Route::get('/colegios', [colegiosController::class, 'index']);
 

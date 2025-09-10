@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use App\Models\Colegios;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+
 
 class colegiosController extends Controller
 {
@@ -13,7 +16,7 @@ class colegiosController extends Controller
     {
         $colegios =  DB::table('colegios')
         ->get();
-        return $colegios;
+        return view('colegios.index', compact('colegios'));
     }
 
     /**
@@ -21,7 +24,7 @@ class colegiosController extends Controller
      */
     public function create()
     {
-        //
+        return view('colegios.create');
     }
 
     /**
@@ -29,7 +32,26 @@ class colegiosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validamos los datos obtenidos por el formulario
+        try {
+            $colegio = $request->validate([
+                'nombre'=> 'required|string|max:42',
+                'ubicacion'=> 'required|string|max:42',
+                'nivel'=> 'required|string|max:10',
+            ]);
+        } catch (ValidationException  $e) {
+            return response()->json([
+                'message' => 'Datos invalidos',
+                'errores' => $e->errors(),
+            ], 422);
+        }
+        
+        Colegios::create([
+            'nombre' => $colegio['nombre'],
+            'ubicacion' => $colegio['ubicacion'],
+            'nivel' => $colegio['nivel'],
+        ]);
+        return redirect()->route('colegios.create')->with('suceces', 'Usuario creado exitosamente.');
     }
 
     /**
